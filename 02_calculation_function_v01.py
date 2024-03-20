@@ -6,6 +6,15 @@ import re
 
 class Converter:
 
+    # check temperature is valid and convert it
+    def bmi_calculate(self):
+        height_response = float(self.height_entry.get())
+        weight_response = float(self.weight_entry.get())
+
+        answer = weight_response / (height_response * height_response)
+
+        return answer
+
     def __init__(self):
 
         # Initialise variables (such as the feedback variable)
@@ -38,11 +47,6 @@ class Converter:
                                        wrap=250, width=40,
                                        justify="left")
         self.temp_instructions.grid(row=1, column=0)
-
-        error = "Please enter a number"
-        self.output_label = Label(self.temp_frame, text="",
-                                  fg="#9C0000")
-        self.output_label.grid(row=3)
 
         # Conversion, help and history / export buttons
         self.button_frame = Frame(self.temp_frame)
@@ -96,8 +100,8 @@ class Converter:
                                         fg=button_fg,
                                         font=button_font,
                                         width=12,
-                                        state=DISABLED,
-                                        command=lambda: self.to_history(self.all_calculations))
+                                        state=DISABLED
+                                        )
         self.to_history_button.grid(row=0, column=2, padx=5, pady=5)
 
         self.to_help_button = Button(self.button_frame,
@@ -105,8 +109,8 @@ class Converter:
                                      bg="#CC6600",
                                      fg=button_fg,
                                      font=button_font,
-                                     width=12,
-                                     command=self.to_help)
+                                     width=12
+                                     )
         self.to_help_button.grid(row=1, column=2, padx=5, pady=5)
 
         self.to_calculate_button = Button(self.temp_frame,
@@ -115,14 +119,24 @@ class Converter:
                                           fg=button_fg,
                                           font=button_font,
                                           width=36,
-                                          command=self.bmi_calculate
+                                          command=DisplayAnswer
                                           )
         self.to_calculate_button.grid(row=5, padx=5, pady=5)
 
-    # check temperature is valid and convert it
-    def bmi_calculate(self):
 
-        response = float(self.height_entry.get())
+class DisplayAnswer:
+
+    def __init__(self, partner):
+
+        self.answer_box = Toplevel()
+
+        self.answer_frame = Frame(self.answer_box, width=300, height=200,
+                                  bg="white")
+
+        self.output_label = Label(self.answer_frame,
+                                  text=partner.bmi
+                                  )
+
 
 class DisplayHelp:
 
