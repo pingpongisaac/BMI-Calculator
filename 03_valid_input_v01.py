@@ -4,13 +4,19 @@ from tkinter import *
 class Converter:
 
     # convert height and weight inputs to bmi value
-    def bmi_calculate(self):
+    def bmi_calculate(self, min_height, min_weight):
         height_response = float(self.height_entry.get())
         weight_response = float(self.weight_entry.get())
 
-        answer = weight_response / (height_response * height_response)
+        answer = (weight_response / (height_response * height_response)) * 10000
 
         self.output_label.config(text=answer)
+
+    def check_height(self, min_value):
+
+        has_error = "no"
+        error = "Please enter a number that is more " \
+                "than {}".format(min_value)
 
     def __init__(self):
 
@@ -42,6 +48,7 @@ class Converter:
         self.button_frame = Frame(self.bmi_frame)
         self.button_frame.grid(row=4)
 
+        error = "Please enter a number"
         self.output_label = Label(self.bmi_frame, text="",
                                   fg="#9C0000")
         self.output_label.grid(row=3)
@@ -113,7 +120,7 @@ class Converter:
                                           fg=button_fg,
                                           font=button_font,
                                           width=36,
-                                          command=lambda: self.bmi_calculate()
+                                          command=lambda: self.bmi_calculate(30, 0)
                                           )
         self.to_calculate_button.grid(row=5, padx=5, pady=5)
 
