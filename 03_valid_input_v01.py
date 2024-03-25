@@ -4,21 +4,67 @@ from tkinter import *
 class Converter:
 
     # convert height and weight inputs to bmi value
-    def bmi_calculate(self, min_height, min_weight):
-        height_response = float(self.height_entry.get())
-        weight_response = float(self.weight_entry.get())
+    def bmi_calculate(self):
 
-        answer = (weight_response / (height_response * height_response)) * 10000
+        height = self.check_height()
+        weight = self.check_weight()
+
+        if height :
+            answer = (weight / (height * height)) * 10000
+        else:
+            answer = "Please ensure both inputs are valid"
 
         self.output_label.config(text=answer)
 
-    def check_height(self, min_value):
+    def check_height(self):
 
         has_error = "no"
-        error = "Please enter a number that is more " \
-                "than {}".format(min_value)
+        error = "Please enter a valid input"
+
+        height_response = self.height_entry.get()
+
+        try:
+            height_response = float(height_response)
+
+            if height_response < 30:
+                has_error = "yes"
+
+        except ValueError:
+            has_error = "yes"
+
+        if has_error == "yes":
+            self.var_has_error.set("yes")
+            self.var_feedback.set(error)
+            return "invalid"
+
+    def check_weight(self):
+
+        has_error = "no"
+        error = "Please enter a valid input"
+
+        height_response = self.height_entry.get()
+
+        try:
+            height_response = float(height_response)
+
+            if height_response < 30:
+                has_error = "yes"
+
+        except ValueError:
+            has_error = "yes"
+
+        if has_error == "yes":
+            self.var_has_error.set("yes")
+            self.var_feedback.set(error)
+            return "invalid"
 
     def __init__(self):
+        # Initialise variables (such as the feedback variable)
+        self.var_feedback = StringVar()
+        self.var_feedback.set("")
+
+        self.var_has_error = StringVar()
+        self.var_has_error.set("no")
 
         # common format for all buttons
         # Arial size 14 bold, with white text
@@ -30,9 +76,9 @@ class Converter:
         self.bmi_frame.grid()
 
         self.bmi_heading = Label(self.bmi_frame,
-                                  text="BMI CALCULATOR",
-                                  font=("Arial", "16", "bold")
-                                  )
+                                 text="BMI CALCULATOR",
+                                 font=("Arial", "16", "bold")
+                                 )
         self.bmi_heading.grid(row=0)
 
         instructions = "Enter your height, weight and age below in the allocated input" \
