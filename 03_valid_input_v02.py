@@ -9,8 +9,12 @@ class Converter:
         height = self.check_height()
         weight = self.check_weight()
 
-        if height == "invalid" or weight == "invalid":
-            answer = "Please make sure both of your inputs are valid"
+        if height == "amount":
+            answer = "Please enter a height higher than 30cm"
+        elif weight == "amount":
+            answer = "Please enter a weight higher than 8kg"
+        elif height == "integer" or weight == "integer":
+            answer = "Please make sure both entries are numbers"
         else:
             answer = (weight / (height * height)) * 10000
 
@@ -25,16 +29,16 @@ class Converter:
         try:
             height_response = float(height_response)
 
-            if height_response < 70:
-                has_error = "yes"
+            if height_response < 30:
+                has_error = "amount"
 
         except ValueError:
-            has_error = "yes"
+            has_error = "integer"
 
-        if has_error == "yes":
-            return "invalid"
-        elif has_error == "no":
+        if has_error == "no":
             return height_response
+        else:
+            return has_error
 
     def check_weight(self):
 
@@ -47,17 +51,15 @@ class Converter:
             weight_response = float(weight_response)
 
             if weight_response < 8:
-                has_error = "yes"
+                has_error = "amount"
 
         except ValueError:
-            has_error = "yes"
+            has_error = "integer"
 
-        if has_error == "yes":
-            self.var_has_error.set("yes")
-            self.var_feedback.set(error)
-            return "invalid"
-        elif has_error == "no":
+        if has_error == "no":
             return weight_response
+        else:
+            return has_error
 
     def __init__(self):
         # Initialise variables (such as the feedback variable)
