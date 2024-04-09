@@ -25,7 +25,7 @@ class Converter:
         try:
             height_response = float(height_response)
 
-            if height_response < 70:
+            if height_response < 0:
                 has_error = "yes"
 
         except ValueError:
@@ -46,7 +46,7 @@ class Converter:
         try:
             weight_response = float(weight_response)
 
-            if weight_response < 8:
+            if weight_response < 0:
                 has_error = "yes"
 
         except ValueError:

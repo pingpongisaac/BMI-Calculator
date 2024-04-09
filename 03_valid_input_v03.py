@@ -7,15 +7,14 @@ class Converter:
     def bmi_calculate(self):
 
         height = self.check_height()
-        weight = self.weight_entry.get()
-        weight = float(weight)
+        weight = self.check_weight()
 
         if height == "amount":
             answer = "Please enter a height higher than 0cm"
-        elif height == "number":
+        elif weight == "amount":
+            answer = "Please enter a weight higher than 0kg"
+        elif height == "number" or weight == "number":
             answer = "Please make sure both entries are numbers"
-        elif height == "empty":
-            answer = "Please make sure neither entry is empty"
         else:
             answer = (weight / (height * height)) * 10000
 
@@ -27,20 +26,37 @@ class Converter:
 
         height_response = self.height_entry.get()
 
-        if height_response is not None:
-            try:
-                height_response = float(height_response)
+        try:
+            height_response = float(height_response)
 
-                if height_response <= 0:
-                    has_error = "amount"
+            if height_response <= 0:
+                has_error = "amount"
 
-            except ValueError:
-                has_error = "number"
-        else:
-            has_error = "empty"
+        except ValueError:
+            has_error = "number"
 
         if has_error == "no":
             return height_response
+        else:
+            return has_error
+
+    def check_weight(self):
+
+        has_error = "no"
+
+        weight_response = self.weight_entry.get()
+
+        try:
+            weight_response = float(weight_response)
+
+            if weight_response < 0:
+                has_error = "amount"
+
+        except ValueError:
+            has_error = "number"
+
+        if has_error == "no":
+            return weight_response
         else:
             return has_error
 
