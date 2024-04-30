@@ -71,9 +71,9 @@ class Converter:
                        " boxes and then press calculate to be given your current BMI " \
                        "status."
         self.bmi_instructions = Label(self.bmi_frame,
-                                       text=instructions,
-                                       wrap=250, width=40,
-                                       justify="left")
+                                      text=instructions,
+                                      wrap=250, width=40,
+                                      justify="left")
         self.bmi_instructions.grid(row=1, column=0)
 
         # Conversion, help and history / export buttons
@@ -85,21 +85,21 @@ class Converter:
         self.output_label.grid(row=3)
 
         self.height_entry = Entry(self.button_frame,
-                                font=("Arial", "14"),
-                                width=12
-                                )
+                                  font=("Arial", "14"),
+                                  width=12
+                                  )
         self.height_entry.grid(row=0, column=1, padx=10, pady=10)
 
         self.weight_entry = Entry(self.button_frame,
-                                font=("Arial", "14"),
-                                width=12
-                                )
+                                  font=("Arial", "14"),
+                                  width=12
+                                  )
         self.weight_entry.grid(row=1, column=1, padx=10, pady=10)
 
         self.age_entry = Entry(self.button_frame,
-                                font=("Arial", "14"),
-                                width=12
-                                )
+                               font=("Arial", "14"),
+                               width=12
+                               )
         self.age_entry.grid(row=2, column=1, padx=10, pady=10)
 
         self.height_label = Label(self.button_frame,
