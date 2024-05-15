@@ -14,6 +14,10 @@ class Converter:
         height = self.check_height()
         weight = self.check_weight()
 
+        self.output_label.config(foreground="dark red")
+        self.weight_entry.config(background="pink")
+        self.height_entry.config(background="pink")
+
         if height == "amount":
             answer = "Please enter a height higher than 0cm"
         elif weight == "amount":
@@ -21,6 +25,9 @@ class Converter:
         elif height == "number" or weight == "number":
             answer = "Please make sure both entries are numbers"
         else:
+            self.output_label.config(foreground="green")
+            self.height_entry.config(background="white")
+            self.weight_entry.config(background="white")
             answer = (weight / (height * height)) * 10000
             answer = self.round_ans(answer)
 
@@ -39,7 +46,7 @@ class Converter:
                 has_error = "amount"
 
         except ValueError:
-            has_error = "height"
+            has_error = "number"
 
         if has_error == "no":
             return height_response
@@ -59,7 +66,7 @@ class Converter:
                 has_error = "amount"
 
         except ValueError:
-            has_error = "weight"
+            has_error = "number"
 
         if has_error == "no":
             return weight_response
