@@ -59,9 +59,16 @@ class DisplayHelp:
                                  bg=background)
         self.input_frame.grid(row=2)
 
+        self.information_frame = Frame(self.help_frame,
+                                       width=500,
+                                       pady=20,
+                                       bg=background)
+        self.information_frame.grid(row=3)
+
         self.help_heading_label = Label(self.help_frame, bg=background,
                                         text="Help / Info",
-                                        font=("Arial", "14", "bold"))
+                                        font=("Arial", "14", "bold"),
+                                        pady=15)
         self.help_heading_label.grid(row=0)
 
         help_text = "This program can be used to gauge whether or not you are " \
@@ -76,9 +83,11 @@ class DisplayHelp:
                     "and the weight in kgs. After you are given you're value you " \
                     "you can enter it below to be given information about your " \
                     "height to weight ratio."
+
         self.help_text_label = Label(self.help_frame, bg=background,
                                      text=help_text, wraplength=500,
-                                     justify="left")
+                                     font=("Arial", "9"),
+                                     pady=10)
         self.help_text_label.grid(row=1, padx=10)
 
         self.bmi_label = Label(self.input_frame,
@@ -96,7 +105,8 @@ class DisplayHelp:
                                        bg="dark blue",
                                        fg="white",
                                        font=("Arial", "12", "bold"),
-                                       text="Inform Me")
+                                       text="Inform Me",
+                                       command=lambda: self.inform_me())
         self.inform_me_button.grid(row=0, column=2)
 
         self.dismiss_button = Button(self.help_frame,
@@ -105,7 +115,94 @@ class DisplayHelp:
                                      fg="#FFFFFF",
                                      command=partial(self.close_help,
                                                      partner))
-        self.dismiss_button.grid(row=3, padx=10, pady=10)
+        self.dismiss_button.grid(row=4, padx=10, pady=10)
+
+        self.value_label = Label(self.information_frame,
+                                 font=("Arial", "16", "bold"),
+                                 bg=background,
+                                 padx=50)
+
+        self.information_label = Label(self.information_frame,
+                                       font=("Arial", "9"),
+                                       wraplength= 400,
+                                       bg=background,
+                                       padx=25)
+
+    def information_check(self):
+
+        bmi_value = self.bmi_entry.get()
+        bmi_value = float(bmi_value)
+
+        if bmi_value < 18.5:
+            text = "You are underweight. Consider taking measures " \
+                   "such as increasing caloric intake and maintaining " \
+                   "a solid exercise regimen. If you are " \
+                   "worried about your weight, it might be best " \
+                   "to visit a doctor for a more comprehensive " \
+                   "analysis and professional advice."
+
+        elif 18.5 <= bmi_value <= 24.9:
+            text = "You are a relatively healthy weight. It is " \
+                   "unlikely you have or will have any issues " \
+                   "regarding your weight. This does not mean " \
+                   "you are necessarily of perfect health, " \
+                   "if you are worried about any aspect of your " \
+                   "health, do not hesitate to visit a doctor."
+
+        elif 24.9 < bmi_value <= 29.9:
+            text = "You are overweight. You could consider measures " \
+                   "such as increasing caloric intake and/or increasing " \
+                   "your amount of exercise per week. If you feel as though " \
+                   "your excess of weight is affecting your life, it would " \
+                   "not be ill-advised to visit your local doctor."
+
+        elif 29.9 < bmi_value <= 39.9:
+            text = "You are considered obese. You could consider measures " \
+                   "such as decreasing caloric intake and/or increasing " \
+                   "your amount of exercise per week. It would be highly " \
+                   "recommended that you vist a doctor and seek remedial " \
+                   "treatment as soon as possible."
+
+        elif bmi_value > 39.9:
+            text = "You are considered morbidly obese. It is likely that " \
+                   "your weight has a relatively large affect on your life. " \
+                   "You are prone to issues such as sleep apnea, heart disease " \
+                   "and various others. See a doctor urgently to receive a plan " \
+                   "on normalising your weight."
+        else:
+            text = "Global"
+
+        return text
+
+    def check_bmi(self):
+
+        has_error = "no"
+
+        bmi_response = self.bmi_entry.get()
+
+        try:
+            weight_response = float(bmi_response)
+
+            if weight_response < 0:
+                has_error = "amount"
+
+        except ValueError:
+            has_error = "number"
+
+        if has_error == "no":
+            return bmi_response
+        else:
+            return has_error
+
+    # informs user about BMI value
+    def inform_me(self):
+        bmi_value = self.check_bmi()
+        information_text = self.information_check()
+
+        self.value_label.grid(column=0, row=0)
+        self.value_label.config(text=bmi_value)
+        self.information_label.grid(column=1, row=0)
+        self.information_label.config(text=information_text)
 
     # closes help dialogue (used by button and x at top of dialogue)
     def close_help(self, partner):
