@@ -124,7 +124,7 @@ class DisplayHelp:
 
         self.information_label = Label(self.information_frame,
                                        font=("Arial", "9"),
-                                       wraplength= 400,
+                                       wraplength=400,
                                        bg=background,
                                        padx=25)
 
@@ -170,7 +170,7 @@ class DisplayHelp:
                    "and various others. See a doctor urgently to receive a plan " \
                    "on normalising your weight."
         else:
-            text = "Global"
+            text = "Nothing"
 
         return text
 
