@@ -15,6 +15,8 @@ class Converter:
             answer = "Please enter a weight higher than 0kg"
         elif height == "number" or weight == "number":
             answer = "Please make sure both entries are numbers"
+        elif height == "empty" or weight == "empty":
+            answer = "Please make sure neither entry is empty"
         else:
             answer = (weight / (height * height)) * 10000
 
@@ -26,14 +28,17 @@ class Converter:
 
         height_response = self.height_entry.get()
 
-        try:
-            height_response = float(height_response)
+        if height_response != "":
+            try:
+                height_response = float(height_response)
 
-            if height_response <= 0:
-                has_error = "amount"
+                if height_response <= 0:
+                    has_error = "amount"
 
-        except ValueError:
-            has_error = "number"
+            except ValueError:
+                has_error = "number"
+        else:
+            has_error = "empty"
 
         if has_error == "no":
             return height_response
@@ -45,15 +50,17 @@ class Converter:
         has_error = "no"
 
         weight_response = self.weight_entry.get()
+        if weight_response != "":
+            try:
+                weight_response = float(weight_response)
 
-        try:
-            weight_response = float(weight_response)
+                if weight_response <= 0:
+                    has_error = "amount"
 
-            if weight_response < 0:
-                has_error = "amount"
-
-        except ValueError:
-            has_error = "number"
+            except ValueError:
+                has_error = "number"
+        else:
+            has_error = "empty"
 
         if has_error == "no":
             return weight_response

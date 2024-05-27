@@ -27,7 +27,7 @@ class Converter:
 
         height_response = self.height_entry.get()
 
-        if height_response is not None:
+        if height_response != "":
             try:
                 height_response = float(height_response)
 

@@ -140,9 +140,9 @@ class DisplayHelp:
                    "to visit a doctor for a more comprehensive " \
                    "analysis and professional advice."
 
-            self.information_frame.config(bg="Light Blue")
-            self.value_label.config(bg="Light Blue")
-            self.information_label.config(bg="Light Blue")
+            self.information_frame.config(bg="#ADD8E6")
+            self.value_label.config(bg="#ADD8E6")
+            self.information_label.config(bg="#ADD8E6")
 
         elif 18.5 <= bmi_value <= 24.9:
             text = "You are a relatively healthy weight. It is " \
@@ -152,9 +152,9 @@ class DisplayHelp:
                    "if you are worried about any aspect of your " \
                    "health, do not hesitate to visit a doctor."
 
-            self.information_frame.config(bg="Lime")
-            self.value_label.config(bg="Lime")
-            self.information_label.config(bg="Lime")
+            self.information_frame.config(bg="#C9F598")
+            self.value_label.config(bg="#C9F598")
+            self.information_label.config(bg="#C9F598")
 
         elif 24.9 < bmi_value <= 29.9:
             text = "You are overweight. You could consider measures " \
@@ -163,9 +163,9 @@ class DisplayHelp:
                    "your excess of weight is affecting your life, it would " \
                    "not be ill-advised to visit your local doctor."
 
-            self.information_frame.config(bg="Yellow")
-            self.value_label.config(bg="Yellow")
-            self.information_label.config(bg="Yellow")
+            self.information_frame.config(bg="#FCF795")
+            self.value_label.config(bg="#FCF795")
+            self.information_label.config(bg="#FCF795")
 
         elif 29.9 < bmi_value <= 39.9:
             text = "You are considered obese. You could consider measures " \
@@ -174,9 +174,9 @@ class DisplayHelp:
                    "recommended that you vist a doctor and seek remedial " \
                    "treatment as soon as possible."
 
-            self.information_frame.config(bg="Orange")
-            self.value_label.config(bg="Orange")
-            self.information_label.config(bg="Orange")
+            self.information_frame.config(bg="#FCB96D")
+            self.value_label.config(bg="#FCB96D")
+            self.information_label.config(bg="#FCB96D")
 
         elif bmi_value > 39.9:
             text = "You are considered morbidly obese. It is likely that " \
@@ -185,9 +185,9 @@ class DisplayHelp:
                    "and various others. See a doctor urgently to receive a plan " \
                    "on normalising your weight."
 
-            self.information_frame.config(bg="Red")
-            self.value_label.config(bg="Red")
-            self.information_label.config(bg="Red")
+            self.information_frame.config(bg="#FC7E6D")
+            self.value_label.config(bg="#FC7E6D")
+            self.information_label.config(bg="#FC7E6D")
         else:
             text = "Nothing"
 
